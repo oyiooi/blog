@@ -1,0 +1,45 @@
+.treeNavCon {
+    width: 100%;
+    height: fit-content;
+    background-color: white;
+    position: relative;
+    border-left: 4px solid rgb(134, 134, 136);
+    &::before {
+        content: '';
+        position: absolute;
+        top: 2em;
+        left: -8px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        border: 3px solid blue;
+        background-color: white;
+        transform: translateY(-50%);
+    }
+    .title {
+        width: 100%;
+        line-height: 3em;
+        padding: 0.5em 1em;        
+        outline: none;
+        letter-spacing: 1px;
+        overflow: hidden;
+        user-select: none;              
+        &:hover {
+            font-weight: bold;
+            color: blue;
+        }
+        div {
+            font-weight: 200;
+            font-size: 0.75em;
+            color: initial;
+        }
+    }
+}
+
+.open {
+    height: fit-content;
+}
+
+.close {
+    height: 4em;
+}

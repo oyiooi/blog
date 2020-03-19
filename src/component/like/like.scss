@@ -1,0 +1,11 @@
+.like {
+    width: 100%;
+    height: fit-content;
+    font-size: 3em;
+    font-weight: bold;
+    text-align: center;
+    .likeCount {
+        font-size: 0.5em;
+        color: blue;
+    }
+}

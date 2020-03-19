@@ -1,0 +1,45 @@
+.horizon {
+    width: fit-content;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    a {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background-color: white;
+        letter-spacing: 2px;
+        color: black;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 0 1em;
+        &:hover, &:focus {
+            color: blue;
+            border-top: 2px solid blue;
+        }
+    }
+}
+
+.vertical {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    a {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background-color: white;
+        letter-spacing: 2px;
+        color: black;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 0.5em 0;
+        &:hover, &:focus {
+            color: blue;
+            border-right: 2px solid blue;
+        }
+    }
+}

@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+#root {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+form {
+    border: 1px solid black;
+    width: 400px;
+    height: 250px;
+    div{
+        width: fit-content;
+        margin: 0 auto 10px auto;
+        &:nth-of-type(1){
+            margin-top: 80px;
+        }
+        label {
+            display: inline-block;
+            width: 80px;
+            text-align: left;
+        }
+        input {
+            margin-left: 10px;
+            &:invalid {
+                border: 1px solid red;
+            }
+        }
+    }
+    button {
+        display: block;
+        width: fit-content;
+        margin: 0 auto;
+    }
+}

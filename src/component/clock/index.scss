@@ -1,0 +1,56 @@
+.clockContain::before {
+    content: '';
+    display: block;
+    width: 3em;
+    height: 3em;
+    border-radius: 0.6em;
+    position: absolute;
+    transform: rotateZ(25deg);
+    transform-origin: center center;
+    top: 6em;
+    left: -2em;
+    background-color: blue;
+    transition: all 0.5s;
+}
+
+.clockContain {
+    overflow: hidden;
+    border: 0.5px rgba(0, 0, 0, 0.418) solid;
+    transition: all 1s;
+    &:hover {
+        box-shadow: 0 0 14px 0 rgba(5, 5, 19, 0.932);
+    };
+    span {
+        position: relative;
+        z-index: 2;
+    }
+    &:hover::before {
+        content: '';
+        box-shadow: 10px 8px 2px 0 rgba(41, 40, 40, 0.342);
+        background-color: blue;
+        top: 5em;
+        left: -1em;
+    }
+
+    &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 1.5em;
+        height: 1.5em;
+        left: 8em;
+        top: 5em;
+        background-color: rgba(0, 0, 0, 0.65);
+        border-radius: 0.5em;
+        transition: all 1s;
+    }
+
+    &:hover::after {
+        content: '';
+        left: 9em;
+        top: 6em;
+        background-color:rgba(0, 0, 0, 0.65);
+        border-radius: 50%;
+        box-shadow: 8px 10px 0 0 blue;
+    }
+}
