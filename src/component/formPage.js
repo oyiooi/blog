@@ -24,15 +24,11 @@ import host from '../host';
 
 const { Option } = Select;
 
-function getId(string){
-    return string.split('/')
-}
-
 class FormPage extends Component {
 
     constructor(props){
         super(props);
-        const id = getId(location.pathname)[2];
+        const id = props.match.params.id;
         this.state={
             fetchingOver: true,
             id: id
