@@ -117,7 +117,7 @@ class Stable extends Component {
                         render={
                             id => (
                                 <span>
-                                    <Link to={`/article/${id}`}>修改</Link>
+                                    <Link to={`/backend/article/${id}`}>修改</Link>
                                     <Divider type='vertical' />
                                     <a onClick={this.showModal}>删除</a>
                                 </span>
