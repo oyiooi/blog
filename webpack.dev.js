@@ -61,7 +61,7 @@ module.exports = {
         new htmlwebpackplugin({
             template: './templete.html',
             filename: 'login/index.html',
-            chunks: ['login','rem'],
+            chunks: ['login'],
             title: 'login'
         }),
         new htmlwebpackplugin({

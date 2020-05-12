@@ -59,7 +59,7 @@ module.exports = {
             base: 'http://www.feelingwilling.club/login/',
             template: './templete.html',
             filename: 'login/index.html',
-            chunks: ['login','rem']
+            chunks: ['login']
         }),
         new htmlwebpackplugin({
             title: 'Blog管理',         
