@@ -42,9 +42,11 @@ module.exports = {
                     }
                 }
             },{
-                test: /\.(jpg|jpeg)$/,
-                use: {
-                    loader: 'url-loader'
+                test: /\.(jpg|jpeg)$/,              
+                loader: 'file-loader',
+                options: {
+                    name: '[name].[ext]',
+                    outputPath: 'images'
                 }
             }
         ]

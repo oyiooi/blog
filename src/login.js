@@ -7,7 +7,7 @@ const App = ()=>{
     return <div className='allContainer'>
         <div className='bg left'></div>
         <div className='bg right'></div>
-        <Login url={'http://localhost:8000/login'}/>
+        <Login/>
     </div>
 }
 

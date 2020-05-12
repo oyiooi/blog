@@ -4,13 +4,13 @@ import './nav.scss'
 const data = [
     {
         text: '首页',
-        link: 'http://www.baidu.com'
+        link: '49.235.72.75'
     },{
         text: '博客',
-        link: 'http://www.wode.com'
+        link: '49.235.72.75/index'
     },{
-        text: '程序',
-        link: 'http://www.code.com'
+        text: '登录',
+        link: '49.235.72.75/login'
     }
 ]
 

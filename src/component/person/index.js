@@ -1,62 +1,89 @@
 import React, { Component } from 'react';
+import Notify from '../notify/';
 import './person.scss';
 
 class Person extends Component {
     constructor(props){
         super(props);
         this.state={
-            errMessage: null
+            message: null,
+            disable: false,
+            show: false,
+            error: false
         }
-        this.inRef=React.createRef();
-        this.submithandle=this.submithandle.bind(this)
+        this.nameRef=React.createRef();
+        this.passRef=React.createRef();
+        this.submithandle=this.submithandle.bind(this);
+        this.hidden=this.hidden.bind(this);
+    }
+
+    hidden(){
+        this.setState({
+            show: false
+        })
     }
 
     submithandle(e){
-        event.preventDefault();
-        let formdata = new FormData(this.inRef.current);
-        formdata.append('id',"5e5eb2d32326d46a6817a939");
+        e.preventDefault();
+        const that = this;
+        let data = {
+            username: this.nameRef.current.value,
+            password: this.passRef.current.value
+        };
         const xhr = new XMLHttpRequest();
-        xhr.open('post','http://localhost:8000/users');
-
+        xhr.open('post','http://www.feelingwilling.club/changepw');
+        xhr.setRequestHeader('Content-Type','application/json');
         xhr.onreadystatechange=function(){
-            if(xhr.readyState==='4'){
-                console.log(xhr.responseText)
+            if(xhr.readyState===4){
+                const res = JSON.parse(xhr.response);
+                    that.setState({
+                        disable: false,
+                        message: res.message,
+                        show: true,
+                        error: res.error
+                    })
+            }else{
+                that.setState({
+                    disable: false,
+                    message: 'Something wrong'+xhr.status+xhr.statusText+xhr.readyState,
+                    show: true,
+                    error: true
+                })
             }
         }
 
-        xhr.send(formdata);
-    }
-
-    componentDidMount(){
-        const that = this;
-        fetch('http://localhost:8000/users/5e5eb2d32326d46a6817a939',{
-            method: 'GET',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res=>res.json()).then(data=>{
-            that.setState({errMessage: data.errMessage},()=>{
-                that.inRef.current.username.value=data.username;
-                that.inRef.current.password.value=data.password;
-            })
+        xhr.send(JSON.stringify(data));
+        this.setState({
+            disable: true
         })
     }
 
     render(){
+        const { message, disable, error,show } = this.state;
         return <div className='personalMess'>
-            <form action='http://localhost:8000/users' method='POST' encType='multipart/form-data' ref={this.inRef}>
+            <form action='http://www.feelingwilling.club/changepw' method='POST' encType='multipart/form-data' onSubmit={e=>this.submithandle(e)}>
                 <div>
-                    <label htmlFor='username'>Username:</label><input type='text' id='username' name='username' required></input>
+                    <label htmlFor='username'>Username:</label>
+                    <input
+                        ref={this.nameRef} 
+                        type='text' 
+                        id='username' 
+                        name='username'
+                        autoComplete='off' 
+                        required></input>
                 </div>
                 <div>
-                    <label htmlFor='password'>Password :</label><input type='password' id='password' name='password' required></input>
+                    <label htmlFor='password'>Password :</label>
+                    <input 
+                        ref={this.passRef}
+                        type='password' 
+                        id='password' 
+                        name='password'
+                        autoComplete='off'
+                        required></input>
                 </div>
-                <div>
-                    <label htmlFor='file'>Avatar:</label><input type='file' accept='.jepg,.jpg,.png' name='img' id='file' required></input>
-                </div>
-                <div className='errMessage'></div>
-                <button type='submit' onClick={e=>this.submithandle(e)}>submit</button>
+                {show?<Notify error={error} message={message} hidden={this.hidden}></Notify>:void null}
+                <button type='submit' disabled={disable}>submit</button>
             </form>
         </div>
     }

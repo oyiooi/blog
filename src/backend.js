@@ -1,11 +1,11 @@
-import React, { Component, useState, useEffect,Suspense} from 'react';
+import React, { useState, useEffect,Suspense} from 'react';
 import ReactDOM from 'react-dom';
 import Menu from './component/menu';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import Stable from './component/stable';
 import Icon from 'antd/es/icon';
 import './style/backend.scss';
-import src from './images/avta.jpeg';
+import './images/avta.jpeg';
 import Canvas from './component/canvas';
 import Person from './component/person/';
 import Bing from './component/bing';
@@ -37,7 +37,7 @@ const App = () => {
         <div className='container'>
         <aside style={{width: width}}>
             <div className='avtarContainer'>
-                <img src={src} alt='头像' />
+                <img src='/images/avta.jpeg' alt='头像' />
                 <div>username</div>
             </div>
             <Menu menuName='修改'>

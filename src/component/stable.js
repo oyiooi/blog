@@ -21,6 +21,7 @@ class Stable extends Component {
             filterKey:'',
             inputValue:'',
             visible: false,
+            deleteId: '',
             confirmLoading: false
         }
         this.onchangeHandler=this.onchangeHandler.bind(this);
@@ -54,12 +55,32 @@ class Stable extends Component {
         this.setState({filterKey: this.state.inputValue})
     }
 
-    showModal(){
-        this.setState({ visible: true })
+    showModal(id){
+        this.setState({ visible: true,deleteId: id })
     }
 
     okHandler(){
-        this.setState({ visible: false})
+        const that = this;
+        fetch(host+'/article/'+this.state.deleteId,{
+            method: 'DELETE',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res=>res.json())
+        .then(data=>{
+            if(data.error){
+                window.alert('删除失败')
+            }else{
+                that.setState((preState)=>{
+                    return {
+                        visible: false,
+                        deleteId: '',
+                        lists: preState.lists.filter((item)=> item.id!==data.deleteId)
+                    }
+                })
+            }
+        }).catch(()=>window.alert('wrong'))
     }
 
     cancelHandler(){
@@ -92,7 +113,9 @@ class Stable extends Component {
         let data = this.filte(lists,filterKey);
         return <div>{!data?<div>ing</div>:<>
             <div className='searchbar'>
-                <div className='searchContainer'><label htmlFor='search'>按关键词：</label><input type='search' id='search' onChange={this.onchangeHandler} /><button className='searchButton' onClick={this.setFilter}>Search</button></div>
+                <label htmlFor='search'>按关键词：</label>
+                <input type='search' id='search' onChange={this.onchangeHandler} />
+                <button className='searchButton' onClick={this.setFilter}>Search</button>
                 <Link className='addButton' to='/backend/articleCreate'>Add</Link>
             </div>
             <div>
@@ -119,7 +142,7 @@ class Stable extends Component {
                                 <span>
                                     <Link to={`/backend/article/${id}`}>修改</Link>
                                     <Divider type='vertical' />
-                                    <a onClick={this.showModal}>删除</a>
+                                    <a onClick={()=>this.showModal(id)}>删除</a>
                                 </span>
                             )
                         } />

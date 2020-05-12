@@ -1,29 +1,36 @@
-import React, { Component,useRef,useState } from 'react';
-
+import React, { useRef,useState } from 'react';
 const Login = (props)=>{
     const userRef = useRef(null);
     const passwordRef = useRef(null);
     const [message,setMessage] = useState('')
-    const { url } = props;
     const header = new Headers({
       'Content-Type': 'application/json'
      }
     )
-    const submit = (e,url)=>{
+    const submit = (e)=>{
 
         e.preventDefault();
         let data = {
             name: userRef.current.value,
             password: passwordRef.current.value
         }
-        fetch(url,{method: 'POST',body:JSON.stringify(data),mode: 'cors',headers:header}).then((res)=>res.json()).then((data)=>{
-            if(data.error){setMessage(data.error)}else(setMessage(data.success))
+        fetch('http://www.feelingwilling.club/loginpass',{method: 'POST',mode: 'cors',credentials: 'include',body:JSON.stringify(data),headers:header}).then((res)=>res.json()).then((data)=>{
+            if(data.error){
+                setMessage(data.message)
+            }else{
+                if(data.mismatch){
+                    setMessage(data.message)
+                }else{
+                    setMessage(data.message);
+                    location.pathname='/backend';
+                }
+            }
         });
     };
 
     return (<fieldset>
         <legend>Login</legend>
-        <form onSubmit={(e)=>{submit(e,url)}}>
+        <form onSubmit={(e)=>{submit(e)}}>
             <input ref={userRef} type='text' placeholder='username' style={{textAlign: "center"}} />
             <input ref={passwordRef} type='password' placeholder='password' style={{textAlign: "center"}} />
             {message?<div style={{fontSize: '16px',color: 'white'}}>{message}</div>:true}

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Form from 'antd/es/form';
 import Input from 'antd/es/input';
 import Select from 'antd/es/select';
@@ -24,15 +24,11 @@ import host from '../host';
 
 const { Option } = Select;
 
-class FormPage extends Component {
+class FormPage extends PureComponent {
 
     constructor(props){
         super(props);
-        const id = props.match.params.id;
-        this.state={
-            fetchingOver: true,
-            id: id
-        };
+        this.state={};
         this.handleSubmit=this.handleSubmit.bind(this)     
     }
 
@@ -44,7 +40,7 @@ class FormPage extends Component {
             body.date = body.date.format('YYYY-MM-DD')
             if (!err) {
               that.setState({fetchingOver: false});
-              const id = that.state.id;
+              const id = that.props.match.params.id;
             fetch(`${host}/article/${id}`,{
                 method: 'POST',
                 headers: {
@@ -64,7 +60,7 @@ class FormPage extends Component {
       };
 
       componentDidMount(){
-          const id = this.state.id;
+          const id = this.props.match.params.id;
           const that = this;
         fetch(`${host}/article/${id}`,{
             method: 'GET',
@@ -92,9 +88,8 @@ class FormPage extends Component {
       }
 
     render() {
-        const fetchingOver = this.state.fetchingOver;
         const { getFieldDecorator } = this.props.form;  
-        return fetchingOver?(<Form labelAlign='right'
+        return <Form labelAlign='right'
                      labelCol= {{ span: 2}} 
                      style={{backgroundColor: 'white',paddingTop: '10px'}}
                      onSubmit={this.handleSubmit}>
@@ -148,6 +143,11 @@ class FormPage extends Component {
                         <Option value='React' label='React'><span>React</span></Option>
                         <Option value='ES' label='ES'><span>ES</span></Option>
                         <Option value='css' label='CSS'><span>CSS</span></Option>
+                        <Option value='webpack' label='webpack'><span>webpack</span></Option>
+                        <Option value='webapi' label='webapi'><span>Web api</span></Option>
+                        <Option value='express' label='express'><span>express</span></Option>
+                        <Option value='mongoDB' label='mongoDB'><span>mongoDB</span></Option>
+                        <Option value='react' label='react'><span>React</span></Option>
                     </Select>
                 )}              
             </Form.Item>
@@ -163,8 +163,10 @@ class FormPage extends Component {
                     <Radio.Button value='Html' >Html</Radio.Button>
                     <Radio.Button value='CSS' >CSS</Radio.Button>
                     <Radio.Button value='ES' >ES</Radio.Button>
-                    <Radio.Button value='Node' >Node</Radio.Button>
+                    <Radio.Button value='backend' >backend</Radio.Button>
                     <Radio.Button value='JS' >JS</Radio.Button>
+                    <Radio.Button value='自动化' >自动化</Radio.Button>
+                    <Radio.Button value='框架' >框架</Radio.Button>
                 </Radio.Group>
                 )}                             
             </Form.Item>
@@ -185,7 +187,7 @@ class FormPage extends Component {
             <Form.Item style={{textAlign: 'center'}}>
                 <Button type='primary' style={{marginBottom: '20px'}} htmlType='submit'>保存</Button>
             </Form.Item>
-        </Form>):(<div>加载中。。。。 </div>)
+        </Form>
     }
 }
 

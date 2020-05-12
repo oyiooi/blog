@@ -37,31 +37,36 @@ module.exports = {
                     }
                 }
             },{
-                test: /\.(jpg|jpeg)$/,
-                use: {
-                    loader: 'url-loader'
-                }
+                test: /\.(jpg|jpeg)$/,              
+                loader: 'file-loader',
+                options: {
+                    name: '[name].[ext]',
+                    outputPath: 'images'
+                }               
             }
         ]
     },
     plugins: [
         new htmlwebpackplugin({
+            title: 'MyBlog',
+            base: 'http://www.feelingwilling.club/index/',
             template: './templete.html',
             filename: 'index/index.html',
-            chunks: ['index'],
-            title: 'blog'
+            chunks: ['index']
         }),
         new htmlwebpackplugin({
+            title: '登录',
+            base: 'http://www.feelingwilling.club/login/',
             template: './templete.html',
             filename: 'login/index.html',
-            chunks: ['login','rem'],
-            title: 'login'
+            chunks: ['login','rem']
         }),
         new htmlwebpackplugin({
+            title: 'Blog管理',         
+            base: 'http://www.feelingwilling.club/backend/',
             template: './templete.html',
             filename: 'backend/index.html',
-            chunks: ['backend'],
-            title: '后台管理'
+            chunks: ['backend']
         }),
         new CleanWebpackPlugin(),
         new mimicssextractplugin({
