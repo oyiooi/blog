@@ -10,7 +10,6 @@ module.exports = {
         index: './src/index.js',
         login: './src/login.js',
         backend: './src/backend.js',
-        rem: './src/rem.js'
     },
     output: {
         filename: '[name]/[name].js',
