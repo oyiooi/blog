@@ -14,7 +14,7 @@ const Login = (props)=>{
             name: userRef.current.value,
             password: passwordRef.current.value
         }
-        fetch('http://www.feelingwilling.club/loginpass',{method: 'POST',mode: 'cors',credentials: 'include',body:JSON.stringify(data),headers:header}).then((res)=>res.json()).then((data)=>{
+        fetch('https://www.feelingwilling.club/loginpass',{method: 'POST',mode: 'cors',credentials: 'include',body:JSON.stringify(data),headers:header}).then((res)=>res.json()).then((data)=>{
             if(data.error){
                 setMessage(data.message)
             }else{

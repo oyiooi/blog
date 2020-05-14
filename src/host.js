@@ -1,3 +1,3 @@
-const host = 'http://www.feelingwilling.com:8000';
+const host = 'http://www.feelingwilling.club:8000';
 
 export default host;

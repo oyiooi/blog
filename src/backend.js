@@ -2,19 +2,20 @@ import React, { useState, useEffect,Suspense} from 'react';
 import ReactDOM from 'react-dom';
 import Menu from './component/menu';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
-import Stable from './component/stable';
+//import Stable from './component/stable';
+const Stable = React.lazy(()=>import(/*webpackChunkName: 'stable'*/'./component/stable'))
 import Icon from 'antd/es/icon';
 import './style/backend.scss';
 import './images/avta.jpeg';
 import Canvas from './component/canvas';
 import Person from './component/person/';
-import Bing from './component/bing';
+//import Bing from './component/bing';
 // const Stable = React.lazy(()=>import('./component/stable'));
-// const Bing = React.lazy(()=>import('./component/bing'));
-// const FormAdd = React.lazy(()=>import('./component/formAdd'));
-// const FormPage = React.lazy(()=>import('./component/formPage'));
-import FormAdd from './component/formAdd';
-import FormPage from './component/formPage';
+const Bing = React.lazy(()=>import(/*webpackChunkName: 'Bing'*/'./component/bing'));
+const FormAdd = React.lazy(()=>import(/*webpackChunkName: 'formadd'*/'./component/formAdd'));
+const FormPage = React.lazy(()=>import(/*webpackChunkName: 'formpage'*/'./component/formPage'));
+//import FormAdd from './component/formAdd';
+//import FormPage from './component/formPage';
 
 const App = () => {
 
@@ -42,7 +43,6 @@ const App = () => {
             </div>
             <Menu menuName='修改'>
                 <div className='subMenu'><Link to='/backend'>文章</Link></div>
-                <div className='subMenu'><Link to='/backend/comment'>评论</Link></div>
             </Menu>
             <Menu menuName='可视化管理'>
                 <div className='subMenu'><Link to='/backend/vision'>饼图</Link></div>
@@ -54,11 +54,10 @@ const App = () => {
         <section>
             <header>{show?<span className='bread' onClick={onWidth} ><Icon type={width=='80vw'?'menu-fold':'menu-unfold'} /></span>:true}<Canvas></Canvas></header>
             <div className='content' style={{height: 'calc(100vh - 80px)'}}>
-                    <Suspense fallback={<div>loading</div>}>
+                    <Suspense fallback={<div>loading...</div>}>
                     <Switch>
                         <Route exact path='/backend' component={Stable}></Route>
                         <Route path='/backend/article/:id' component={FormPage}></Route>
-                        <Route path='/backend/comment' ></Route>
                         <Route path='/backend/vision' component={Bing}></Route>
                         <Route path='/backend/person' ><Person /></Route>
                         <Route path='/backend/articleCreate' component={ FormAdd }></Route>

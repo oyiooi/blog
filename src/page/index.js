@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component,Suspense } from 'react';
 import './page.scss';
 import Icon from 'antd/es/icon';
 import Like from '../component/like/';
 import {CommentCommit} from '../component/comment';
-import StoreComments from '../component/singlecomment';
+const StoreComments = React.lazy(()=>import(/*webpackChunkName: 'comments'*/'../component/singlecomment'));
 import host from '../host';
 
 class Page extends Component {
@@ -94,7 +94,7 @@ class Page extends Component {
             <div className='commit'>
                 <CommentCommit></CommentCommit>
             </div>
-            <StoreComments></StoreComments>
+            <Suspense fallback={<div>loading...</div>}><StoreComments></StoreComments></Suspense>
         </div> ):<div>ing</div>;
     }
 }
