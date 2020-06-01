@@ -48,21 +48,21 @@ module.exports = {
     plugins: [
         new htmlwebpackplugin({
             title: 'MyBlog',
-            base: 'http://www.feelingwilling.club/index/',
+            base: 'https://www.feelingwilling.club/index/',
             template: './templete.html',
             filename: 'index/index.html',
             chunks: ['index']
         }),
         new htmlwebpackplugin({
             title: '登录',
-            base: 'http://www.feelingwilling.club/login/',
+            base: 'https://www.feelingwilling.club/login/',
             template: './templete.html',
             filename: 'login/index.html',
             chunks: ['login']
         }),
         new htmlwebpackplugin({
             title: 'Blog管理',         
-            base: 'http://www.feelingwilling.club/backend/',
+            base: 'https://www.feelingwilling.club/backend/',
             template: './templete.html',
             filename: 'backend/index.html',
             chunks: ['backend']

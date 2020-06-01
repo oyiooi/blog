@@ -65,8 +65,8 @@ function loop () {
         let x = Math.random()*width;
         let y = Math.random()*height;
         let size = Math.random()*7+8;
-        let vx = Math.random()*4+1;
-        let vy = Math.random()*4+1;;
+        let vx = Math.random()*2+1;
+        let vy = Math.random()*2+1;;
         let ball = new Ball(x,y,vx,vy,'white',size)
         balls.push(ball)
     }
